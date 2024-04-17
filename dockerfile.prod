@@ -12,8 +12,10 @@ RUN npm install
 # Builder - Construindo la aplicacion
 FROM node:21-alpine3.19  as build
 
-ARG  ORDERS_DB_URL
+ARG ORDERS_DB_URL
 ENV DATABASE_URL=$ORDERS_DB_URL
+
+RUN echo "database_url ::: $DATABASE_URL";
 
 WORKDIR /usr/src/app
 
