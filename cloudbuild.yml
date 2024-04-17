@@ -18,3 +18,5 @@ availableSecrets:
   secretManager:
   - versionName: projects/753068323011/secrets/orders_database_url/versions/1
     env: 'DATABASE_URL'
+
+    
