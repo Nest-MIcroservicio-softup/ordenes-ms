@@ -15,6 +15,7 @@ datasource db {
 
 enum OrdenStatus {
   PENDIENTE
+  PAGADO
   CANCELADO
   ENVIADO
 }
@@ -26,11 +27,13 @@ model Orden {
   totalItems Int
   pagado     Boolean     @default(false)
   fechaPago  DateTime?
+  stripeId   String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   ordenItems OrdenItem[]
+  ReciboPago ReciboPago?
 }
 
 model OrdenItem {
@@ -41,4 +44,14 @@ model OrdenItem {
 
   Orden   Orden?  @relation(fields: [ordenId], references: [id])
   ordenId String?
+}
+
+model ReciboPago {
+  id        String   @id @default(uuid())
+  ordenId   String @unique
+  reciboUrl String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orden Orden @relation(fields: [ordenId], references: [id])
 }
